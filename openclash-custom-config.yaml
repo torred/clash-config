@@ -438,6 +438,9 @@ proxy-providers:
 proxies:
   - { name: 直连, type: direct}
 
+# 添加美国住宅ip
+  - { name: "美国住宅-1", type: socks5, server: 1.1.1.1, port: 123, username: xxxx, password: xxxx, udp: true }
+
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
@@ -454,11 +457,13 @@ proxy-groups:
   - { name: 🎥 NETFLIX, type: select, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 台湾故转, 🔯 美国故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 台湾自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇼🇸 台湾节点, 🌐 全部节点, 直连]}
   - { name: 💶 PayPal, type: select, proxies: [🔯 香港故转, 🔯 美国故转, ♻️ 香港自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
   - { name: 🦈 Facebook, type: select, proxies: [🔯 香港故转, 🔯 台湾故转, 🔯 美国故转, ♻️ 香港自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇺🇲 美国节点, 🇬🇧 英国节点, 🌐 全部节点]}
-  - { name: 💫 GoogleVoice, type: select, proxies: [🇺🇲 美国节点]}
+  - { name: 💫 GoogleVoice, type: select, proxies: [🇺🇲 美国住宅-1, 🇺🇲 美国节点]}
   - { name: 🦪 Cryptocurrency, type: select, proxies: [🔯 台湾故转, 🔯 日本故转, ♻️ 台湾自动, ♻️ 日本自动, 🇼🇸 台湾节点, 🇯🇵 日本节点]}
 
   - { name: 🐟 漏网之鱼, type: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, 🔯 台湾故转, 🔯 美国故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 台湾自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇩🇪 德国节点, 🇬🇧 英国节点, 🇼🇸 台湾节点, 🌐 全部节点, 直连]}
 
+  - { name: 🇺🇲 美国住宅-31, type: relay, proxies: [ "♻️ 香港自动", "美国住宅-1"]}
+  
   - { name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong"}
   - { name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日本|jp|japan"}
   - { name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?i)新加坡|坡|狮城|SG|Singapore"}
@@ -496,6 +501,8 @@ rules:
   - RULE-SET,ai,🤖 ChatGPT
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
+  - DOMAIN-SUFFIX,torred.com,💫 GoogleVoice
+  - RULE-SET,googlevoice,💫 GoogleVoice  
   - RULE-SET,google_domain,🍀 Google
   - RULE-SET,onedrive_domain,🐬 OneDrive
   - RULE-SET,microsoft_domain,🪟 Microsoft
@@ -512,7 +519,6 @@ rules:
   - RULE-SET,netflix_ip,🎥 NETFLIX
   - RULE-SET,telegram_ip,📲 Telegram
   - RULE-SET,facebook_ip,🦈 Facebook
-  - RULE-SET,googlevoicelist,💫 GoogleVoice
   - RULE-SET,geolocation-!cn,🚀 默认代理
 
   - RULE-SET,cn_ip,直连
@@ -533,7 +539,7 @@ rule-providers:
     path: "./rule_provider/my_private.mrs"
   proxylite:
     <<: *class
-    url: https://cdn.jsdelivr.net/gh/qichiyuhub/rule@main/proxy.list
+    url: url: https://cdn.jsdelivr.net/gh/torred/rule@main/proxy.list
     path: "./rule_provider/my_proxy.list"
   ai:
     <<: *domain
@@ -543,6 +549,10 @@ rule-providers:
     <<: *domain
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.mrs
     path: "./rule_provider/my_youtube.mrs"
+  googlevoice:
+    <<: *class
+    url: https://cdn.jsdelivr.net/gh/torred/clash-config@main/rule-files/googlevoice.list
+    path: "./rule_provider/my_googlevoice.list"    
   google_domain:
     <<: *domain
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs
@@ -595,10 +605,6 @@ rule-providers:
     <<: *domain
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-cryptocurrency.mrs
     path: "./rule_provider/my_category-cryptocurrency.mrs"
-  googlevoicelist:
-    <<: *class
-    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GoogleVoice/GoogleVoice.list
-    path: "./rule_provider/my_googlevoice.list"
     
   private_ip:
     <<: *ip
