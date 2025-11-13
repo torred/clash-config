@@ -11,8 +11,8 @@ DOMAIN-SUFFIX,torred.com
 DOMAIN-KEYWORD,234to112
 
 # google voice DNS
-# TOTAL: 3
+# TOTAL: 4
+DOMAIN-SUFFIX,voice.googleapis.com
 DOMAIN-SUFFIX,lens.l.google.com
 DOMAIN-SUFFIX,voice.google.com
 DOMAIN-SUFFIX,voice.clients6.google.com
-
