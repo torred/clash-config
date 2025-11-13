@@ -4,8 +4,15 @@
 # UPDATED: 2025-11-13 20:30:51
 # DOMAIN: 1
 
+# 域名后缀匹配
+DOMAIN-SUFFIX,torred.com
+
+# 域名关键字匹配
+DOMAIN-KEYWORD,234to112
+
+# google voice DNS
 # TOTAL: 3
-DOMAIN,lens.l.google.com
-DOMAIN,voice.google.com
-DOMAIN,voice.clients6.google.com
+DOMAIN-SUFFIX,lens.l.google.com
+DOMAIN-SUFFIX,voice.google.com
+DOMAIN-SUFFIX,voice.clients6.google.com
 
