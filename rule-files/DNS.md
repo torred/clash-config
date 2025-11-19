@@ -144,3 +144,39 @@ option dns '1.1.1.1 8.8.8.8'
 🧩 总结
 在这个隐私被“标签化”的时代，加密DNS是你最简单、最有效的网络护盾。
 选一个可靠的DNS，你的网络就能更快、更干净、更安全。
+
+更新国内DoT列表如下：
+tls.danqingximeng.top
+dot.liweibin.com
+alexander1995.top
+whd.oder1988.cn
+dot.yuanbaicai.vip
+dns.clstudy.cn
+dns.worthstudy.cn
+tls.yu17.net（MaxMind地址库显示非国内）
+cenxt.cn
+dot.pub
+dot.dns.pub
+dot.sagez.cn
+dot.onedns.net
+101.198.198.198（MaxMind地址库显示该地址在境外）
+tls.yuanbaicai.vip
+dns.alidns.com
+n.360.cn（MaxMind地址库显示对应地址在国外）
+tls.dot.360.net
+
+部分国内DoH列表：
+v6.n.360.net/dns-query
+v6.n.360.net/dns
+tls.doh.pub/dns-query
+doh.360.cn/dns-query
+doh-pure.doh.pub/dns-query
+doh.pub/dns-query
+dot.onedns.net/dns-query
+sm2.dns.pub/dns-query
+tls.gemingyu.top/dns-query
+dns.alidns.com/dns-query
+doh.360.cn/doh
+doh.qiaoba.online/dns-query
+dns.worthstudy.cn/dns-query
+dns.qiaoba.online/dns-query
